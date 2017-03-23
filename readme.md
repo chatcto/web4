@@ -1,0 +1,139 @@
+#PHP语法
+- empty()
+    - 变量不存在返回true
+    - 变量存在且值为''/'0'/0/Null/false/array()/var$var/以及没有任何属性的对象返回true
+- $_GET("")
+    - 用于收集使用GET方式发送的表单信息
+- file_put_contents()
+    - 把一个字符串写入问文件中
+    - file_put_contents(file,data,mode,context)
+        - file:必填,规定写入数据的文件,如果文件不存在,则创建一个新文件
+        - data:可选,规定写入文件的数据,可以是字符串/数组/数据流
+        - mode:可选,规定如何打开写入文件
+            - FILE_USE_INCLUDE_PATH:检查副本内置路径
+            - FILE_APPEND:移至文件末尾(避免删除文件中已存在的内容)
+            - LOCK_EX:锁定文件
+        - 写入换行符
+        file_put_contents('wx.log', 'post数据为空'.FILE_APPEND."\n", FILE_APPEND)
+- 数据类型
+    - String:字符串
+        - $string='字符串';
+    - Integer:整型
+        - $integer=1;
+    - Float:浮点型
+        - $float=0.1;
+    - Boolean:布尔
+        - $boolean=true;
+    - Array:数组
+        - $array=(1,2,3);
+    - Object:对象
+        - PHP中对象必须声明,必须使用class关键字声明类对象,类包含属性和方法,类中定义数据类型,实例化中使用数据类型
+        - class Car{
+            var $color;
+            function Car($color='green'){
+                $this->color=$color;
+            }
+            function what_color(){
+                return $this->color;
+            }
+        }
+    - NULL:NULL
+        - 设置变量值为NULL清空变量数据
+- var_dump():返回变量的数据类型和值
+- serialize():序列化存储
+    - 将PHP中的变量如对象/数组的值序列化为字符串后存储起来
+- sort():对索引数组进行升序排序,成功返回true,失败返回false
+    - sort(array,sortingtype)
+        - array:必需,规定进行排序的数组
+        - sortingtype:可选,规定如何比较数组的元素/项目
+            - 0=SORT_REGULAR:默认,常规顺序排序(不改变类型)
+            - 1=SORT_NUMERIC:把每一项作为数字来处理
+            - 2=SORT_STRING:把每一项作为字符串来处理
+            - 3=SORT_LOCALE_STRING:把每一项作为字符串来处理,基于当前区域设置(可以通过setlocale()进行更改)
+            - 4=SORT_NATURAL:把每一项作为字符串来处理,使用类似natsort()自然排序
+            - 5=SORT_FLAG_CASE:可以结合SORT_STRING或SORT_NATURAL对字符串进行排序,不区分大小写
+- implode():把数组元素组合为字符串
+    - implode(separator,array) 
+        - separator:可选,规定数组之间放置的内容,默认是''
+        - array:必需,要组合为字符串的数组
+- sha1():函数计算字符串的 SHA-1 散列
+    - sha1(string,raw)
+        - string:必需,规定要计算的字符串
+        - raw:可选,规定十六进制或二进制
+            - true:二进制
+            - false:十六进制
+- file_get_contents()把整个文件读入一个字符串中
+    - file_get_contents(path,include_path,context,start,max_length)
+        - path:必需,规定读取的文件
+        - include_path:可选,如果还想在include_path(php.ini)中搜索文件的话,设置该参数为'1'
+        - context:可选,规定句柄的环境,使用NULL则忽略
+        - start:可选,规定在文件中开始读取的位置
+        - max_length:可选,规定读取的字节数
+- php://input 
+    - 可以读取没有处理过的POST数据
+- simplexml_load_string():函数把 XML 字符串载入对象中
+    - simplexml_load_file(string,class,options,ns,is_prefix)
+        - string:必需,规定要使用的 XML 字符串
+        - class:可选,规定新对象的 class
+        - options:可选,规定附加的 Libxml 参数,通过指定选项为 1 或 0(TRUE 或 FALSE,例如 LIBXML_NOBLANKS(1))进行设置
+            - LIBXML_COMPACT:激活节点的优化配置(可加速应用程序)
+            - LIBXML_DTDATTR:设置默认的 DTD 属性
+            - LIBXML_DTDLOAD:装载额外的子集
+            - LIBXML_DTDVALID:验证 DTD 有效性
+            - LIBXML_NOBLANKS:删除空节点
+            - LIBXML_NOCDATA:将 CDATA 设置为文本节点
+            - LIBXML_NOEMPTYTAG:扩展空标签(例如 <br/> 到 <br></br>),仅在 DOMDocument->save() 和 DOMDocument->saveXML() 函数中有效
+            - LIBXML_NOENT:替代实体
+            - LIBXML_NOERROR:不显示错误报告
+            - LIBXML_NONET:装载文档时停止访问网络
+            - LIBXML_NOWARNING:不显示警告报告
+            - LIBXML_NOXMLDECL:当存储一个文档时放弃 XML 声明
+            - LIBXML_NSCLEAN:删除多余的名称空间声明
+            - LIBXML_PARSEHUGE :设置 XML_PARSE_HUGE 标志,用来放宽解析器的任何强制限制,这将影响诸如文档的最大深度和文本节点大小限制等。
+            - LIBXML_XINCLUDE:使用 XInclude 替代
+            - LIBXML_ERR_ERROR:获取可纠正的错误
+            - LIBXML_ERR_FATAL:获取致命错误
+            - LIBXML_ERR_NONE:不获取错误
+            - LIBXML_ERR_WARNING:获取简单警告
+            - LIBXML_VERSION:获取 libxml 版本（例如 20605 或 20617）
+            - LIBXML_DOTTED_VERSION:获取带点的 libxml 版本（例如 2.6.5 或 2.6.17）
+        - ns:可选,规定命名空间前缀或 URI
+        - is_prefix:可选,规定一个布尔值,如果 ns 是前缀则为 TRUE,如果 ns 是 URI 则为 FALSE,默认是 FALSE
+- 变量作用域
+    - local:
+    - global:函数内访问全局变量
+    - static:当一个函数完成时,它的所有变量通常都会被删除,然而,有时候您希望某个局部变量不要被删除
+    - parameter
+-  函数把格式化的字符串写入变量中
+    - sprintf(format,arg1,arg2,arg++)
+        - format:必需,规定字符串以及如何格式化其中的变量
+            - %%:返回一个百分号 %
+            - %b:二进制数
+            - %c:ASCII 值对应的字符
+            - %d:包含正负号的十进制数（负数、0、正数）
+            - %e:使用小写的科学计数法（例如 1.2e+2）
+            - %E:使用大写的科学计数法（例如 1.2E+2）
+            - %u:不包含正负号的十进制数（大于等于 0）
+            - %f:浮点数（本地设置）
+            - %F:浮点数（非本地设置）
+            - %g:较短的 %e 和 %f
+            - %G:较短的 %E 和 %f
+            - %o:八进制数
+            - %s:字符串
+            - %x:十六进制数（小写字母）
+            - %X:十六进制数（大写字母）
+        - arg1:必需,规定插到 format 字符串中第一个 % 符号处的参数
+- count():返回数组长度
+- 关联数组
+    - $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43")
+- 访问符号
+    - => 是数组成员访问符号
+    - -> 是对象成员访问符号
+- .:并置运算符
+    - 用于把两个字符串的值连接起来
+    - a.=b:将b连接到a上
+- strval()返回string值
+    - 不能用于数组和对象
+- session
+    - session_id():获取设置当前会话ID
+    - session_start():启用新会话或重用现有会话
